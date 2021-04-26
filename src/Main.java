@@ -1,7 +1,8 @@
+import builderPattren.BankAccount;
 import factoryPattren.PlanFactory;
 import factoryPattren.abstractPlan.Plan;
-import proxyPattren.AbsctractProxy.Internet;
-import proxyPattren.implementation.ProxyInternet;
+import singleton.EmployeeEarlyInit;
+import singleton.EmployeeLazy;
 
 import java.io.IOException;
 
@@ -13,5 +14,21 @@ public class Main {
         PlanFactory planFactory = new PlanFactory();
         Plan plan = planFactory.getPlan("COMMERCIAL");
         plan.calculateBill(10);
+
+        //singleton
+        EmployeeEarlyInit employeeEarlyInit = EmployeeEarlyInit.getInstance();
+        System.out.println(employeeEarlyInit.toString());
+        EmployeeLazy employeeLazy = EmployeeLazy.getInstancy();
+        System.out.println(employeeLazy.toString());
+
+//        Builder
+        BankAccount account = new BankAccount.Builder()
+                                .accoutNumber(111)
+                                .branch("xyz")
+                                .name("ac")
+                                .city("kkk")
+                .build();
+        System.out.println(account.getAccountNumber());
+
     }
 }
