@@ -5,30 +5,48 @@ import singleton.EmployeeEarlyInit;
 import singleton.EmployeeLazy;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Stack;
 
 public class Main {
 
+
+
+    //     [{(
+//
+//     )}]
+    static boolean isBalancedBarackets(String inputStr) {
+
+        Stack<Character> stack = new Stack<>();
+
+        //(({})[]{()})
+        for (int i = 0; i < inputStr.length() ; i++) {
+
+            if (inputStr.charAt(i) == '(' || inputStr.charAt(i) == '{' || inputStr.charAt(i) == '[')
+                stack.push(inputStr.charAt(i));
+            else {
+                if (stack.peek() == '(' && inputStr.charAt(i) == ')')
+                    stack.pop();
+                else if (stack.peek() == '[' && inputStr.charAt(i) == ']')
+                    stack.pop();
+                else if (stack.peek() == '{' && inputStr.charAt(i) == '}')
+                    stack.pop();
+
+            }
+
+
+        }
+
+    boolean balanaced = stack.isEmpty();
+       return balanaced;
+
+
+    }
+
     public static void main(String[] args) throws IOException {
 
-//        factory
-        PlanFactory planFactory = new PlanFactory();
-        Plan plan = planFactory.getPlan("COMMERCIAL");
-        plan.calculateBill(10);
-
-        //singleton
-        EmployeeEarlyInit employeeEarlyInit = EmployeeEarlyInit.getInstance();
-        System.out.println(employeeEarlyInit.toString());
-        EmployeeLazy employeeLazy = EmployeeLazy.getInstancy();
-        System.out.println(employeeLazy.toString());
-
-//        Builder
-        BankAccount account = new BankAccount.Builder()
-                                .accoutNumber(111)
-                                .branch("xyz")
-                                .name("ac")
-                                .city("kkk")
-                .build();
-        System.out.println(account.getAccountNumber());
-
+//(({})[]{()})
+//        ({)}
+        System.out.println("Balanced = " + isBalancedBarackets("({}))))"));
     }
 }
